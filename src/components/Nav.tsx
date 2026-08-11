@@ -30,7 +30,7 @@ export default function Nav() {
             <a
               key={link.id}
               href={link.href}
-              className="font-body text-[10px] text-ink/70 transition hover:text-brown"
+              className="font-body text-sm text-ink/70 transition hover:text-brown"
             >
               {link.label}
             </a>
@@ -40,7 +40,7 @@ export default function Nav() {
         <div className="hidden items-center gap-4 lg:flex">
           <a
             href={navContactCta.href}
-            className="rounded-md bg-olive ps-5 pe-5 py-2 font-body text-[10px] text-greige transition hover:scale-[1.03] hover:opacity-90"
+            className="rounded-md bg-olive ps-5 pe-5 py-2 font-body text-sm text-greige transition hover:scale-[1.03] hover:opacity-90"
           >
             {navContactCta.label}
           </a>
@@ -81,7 +81,7 @@ export default function Nav() {
                 key={link.id}
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
-                className="font-body text-[10px] text-ink/80"
+                className="font-body text-sm text-ink/80"
               >
                 {link.label}
               </a>
@@ -89,7 +89,7 @@ export default function Nav() {
             <a
               href={navContactCta.href}
               onClick={() => setIsMenuOpen(false)}
-              className="w-fit rounded-md bg-olive ps-5 pe-5 py-2 font-body text-[10px] text-greige"
+              className="w-fit rounded-md bg-olive ps-5 pe-5 py-2 font-body text-sm text-greige"
             >
               {navContactCta.label}
             </a>

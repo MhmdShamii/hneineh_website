@@ -1,12 +1,11 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react'
 import { contactFields, contactSection, contactValidationMessages } from '../content/contact'
-import { buildMailtoUrl } from '../lib/mailto'
 import Bdi from './ui/Bdi'
 import Reveal from './ui/Reveal'
 import SectionHeading from './ui/SectionHeading'
 
 type FormState = Record<string, string>
-type Status = 'idle' | 'opened'
+type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const phonePattern = /^[0-9+\s-]{7,}$/
@@ -31,8 +30,11 @@ export default function ContactSection() {
     setValues((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
+    const form = event.currentTarget
+    if ((form.elements.namedItem('botcheck') as HTMLInputElement | null)?.checked) return
 
     const nextErrors: FormState = {}
     for (const field of contactFields) {
@@ -42,14 +44,28 @@ export default function ContactSection() {
     setErrors(nextErrors)
     if (Object.keys(nextErrors).length > 0) return
 
-    const mailtoUrl = buildMailtoUrl(contactSection.recipientEmail, contactSection.emailSubject, {
-      name: values.name ?? '',
-      phone: values.phone ?? '',
-      email: values.email ?? '',
-      message: values.message ?? '',
-    })
-    window.open(mailtoUrl, '_blank')
-    setStatus('opened')
+    setStatus('submitting')
+    try {
+      const response = await fetch(contactSection.web3formsEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: contactSection.web3formsAccessKey,
+          subject: contactSection.emailSubject,
+          from_name: values.name ?? '',
+          ...values,
+        }),
+      })
+      const result = await response.json()
+      if (result.success) {
+        setStatus('success')
+        setValues({})
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -62,6 +78,8 @@ export default function ContactSection() {
 
         <Reveal delayMs={100}>
           <form onSubmit={handleSubmit} noValidate className="mt-10 grid gap-5 sm:grid-cols-2">
+            <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+
             {contactFields.map((field) => {
               const error = errors[field.name]
               const spansFullWidth = field.type === 'email' || field.type === 'textarea'
@@ -101,20 +119,22 @@ export default function ContactSection() {
 
             <button
               type="submit"
-              className="mt-2 rounded-md bg-olive px-8 py-3 font-body text-greige transition hover:scale-[1.02] hover:opacity-90 sm:col-span-2 sm:justify-self-start"
+              disabled={status === 'submitting'}
+              className="mt-2 rounded-md bg-olive px-8 py-3 font-body text-greige transition hover:scale-[1.02] hover:opacity-90 disabled:opacity-60 disabled:hover:scale-100 sm:col-span-2 sm:justify-self-start"
             >
-              {contactSection.submitLabel}
+              {status === 'submitting' ? contactSection.submittingLabel : contactSection.submitLabel}
             </button>
 
-            {status === 'opened' && (
+            {status === 'success' && (
               <p className="font-body text-sm text-olive sm:col-span-2" role="status">
-                {contactSection.openedMessage}
+                {contactSection.successMessage}
               </p>
             )}
-
-            <p className="font-body text-xs text-ink/50 sm:col-span-2">
-              {contactSection.fallbackNotice} <Bdi>{contactSection.recipientEmail}</Bdi>
-            </p>
+            {status === 'error' && (
+              <p className="font-body text-sm text-red-700 sm:col-span-2" role="alert">
+                {contactSection.errorMessage} <Bdi>{contactSection.recipientEmail}</Bdi>
+              </p>
+            )}
           </form>
         </Reveal>
       </div>

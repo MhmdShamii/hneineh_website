@@ -4,12 +4,22 @@ export const contactSection = {
   id: 'contact',
   title: 'شاركنا فرحتك',
   subtitle: 'عبّي النموذج وفريقنا بيتواصل معك بأسرع وقت.',
-  /** No backend yet — the form opens a pre-filled draft in the user's own mail app. */
   recipientEmail: 'info@hneineh.com',
   emailSubject: 'طلب تواصل جديد من موقع حنينة',
-  submitLabel: 'إرسال عبر البريد الإلكتروني',
-  openedMessage: 'رح ينفتحلك تطبيق البريد وفيه رسالتك جاهزة، بس أكّد الإرسال من هناك.',
-  fallbackNotice: 'إذا ما انفتح تطبيق البريد تلقائيًا، تواصل معنا مباشرة على',
+  /**
+   * Web3Forms delivers the submission straight to `recipientEmail` with no
+   * backend of our own — https://web3forms.com. The submit endpoint is
+   * fixed/public for every Web3Forms user (not environment-specific), so it
+   * lives here as a constant; only the Access Key varies per account and
+   * lives in .env (see .env.example). The key is public-by-design (meant to
+   * ship in client code) — it's kept in .env for easy swapping, not secrecy.
+   */
+  web3formsEndpoint: 'https://api.web3forms.com/submit',
+  web3formsAccessKey: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+  submitLabel: 'إرسال',
+  submittingLabel: 'جاري الإرسال...',
+  successMessage: 'تم إرسال رسالتك بنجاح، رح نتواصل معك قريبًا.',
+  errorMessage: 'صار في خطأ أثناء الإرسال، جرّب مرة تانية أو تواصل معنا مباشرة على',
 }
 
 export const contactFields: ContactFormField[] = [

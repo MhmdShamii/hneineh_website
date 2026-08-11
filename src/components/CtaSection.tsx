@@ -1,7 +1,10 @@
 import { ctaSection } from '../content/cta'
+import { usePick } from '../i18n/languageContext'
 import Reveal from './ui/Reveal'
 
 export default function CtaSection() {
+  const cta = usePick(ctaSection)
+
   return (
     <section className="relative overflow-hidden bg-olive px-6 py-16 text-center">
       <div
@@ -16,14 +19,12 @@ export default function CtaSection() {
       />
 
       <Reveal className="relative">
-        <h2 className="font-body mx-auto max-w-2xl text-2xl text-greige sm:text-3xl">
-          {ctaSection.heading}
-        </h2>
+        <h2 className="font-body mx-auto max-w-2xl text-2xl text-greige sm:text-3xl">{cta.heading}</h2>
         <a
-          href={ctaSection.buttonHref}
+          href={cta.buttonHref}
           className="font-body mt-6 inline-block rounded-md bg-greige ps-8 pe-8 py-3 text-brown transition hover:scale-[1.03] hover:shadow-lg"
         >
-          {ctaSection.buttonLabel}
+          {cta.buttonLabel}
         </a>
       </Reveal>
     </section>

@@ -2,16 +2,19 @@ import { useNavigate } from 'react-router-dom'
 import ImagePlaceholder from '../components/ui/ImagePlaceholder'
 import ImageWithLoader from '../components/ui/ImageWithLoader'
 import Reveal from '../components/ui/Reveal'
-import { galleryPlaceholderImages, galleryLinks } from '../content/gallery'
+import { galleryLinks, galleryPageText, galleryPlaceholderImages } from '../content/gallery'
+import { usePick } from '../i18n/languageContext'
 
 type GalleryPageProps = {
-  galleryId: keyof typeof galleryPlaceholderImages
+  galleryId: keyof (typeof galleryPlaceholderImages)['ar']
 }
 
 export default function GalleryPage({ galleryId }: GalleryPageProps) {
   const navigate = useNavigate()
-  const link = galleryLinks.find((item) => item.id === galleryId)
-  const images = galleryPlaceholderImages[galleryId]
+  const links = usePick(galleryLinks)
+  const images = usePick(galleryPlaceholderImages)[galleryId]
+  const pageText = usePick(galleryPageText)
+  const link = links.find((item) => item.id === galleryId)
 
   return (
     <main className="min-h-screen bg-greige px-6 py-16 text-ink">
@@ -19,9 +22,12 @@ export default function GalleryPage({ galleryId }: GalleryPageProps) {
         <button
           type="button"
           onClick={() => navigate(-1)}
-          className="font-body text-sm text-ink/60 transition hover:text-brown"
+          className="font-body inline-flex items-center gap-1 text-sm text-ink/60 transition hover:text-brown"
         >
-          → الرئيسية
+          <span aria-hidden="true" className="rtl:rotate-180">
+            ←
+          </span>
+          {pageText.backToHome}
         </button>
 
         <h1 className="font-body mt-4 text-3xl font-semibold text-brown sm:text-4xl">{link?.title}</h1>

@@ -4,6 +4,11 @@
  * record carries a stable `id` so array order is never load-bearing.
  */
 
+export type Lang = 'ar' | 'en'
+
+/** A value that differs per language — the base unit every bilingual content export is built from. */
+export type Localized<T> = Record<Lang, T>
+
 export type SocialPlatform = 'facebook' | 'pinterest' | 'instagram' | 'tiktok'
 
 export interface SocialLink {
@@ -27,7 +32,7 @@ export interface StatItem {
 
 export interface ProcessStep {
   id: string
-  /** Arabic-Indic numeral display, e.g. "١", "٢" */
+  /** Numeral display — Arabic-Indic ("١") for ar, Western ("1") for en */
   numeral: string
   title: string
   body: string
@@ -53,8 +58,8 @@ export interface FaqItem {
   id: string
   question: string
   answer: string
-  /** Optional sub-list of items rendered under the answer (e.g. services offered) */
-  subList?: ServiceItem[]
+  /** When true, the current language's `services` list renders under the answer */
+  showServicesList?: boolean
 }
 
 export interface GalleryLink {

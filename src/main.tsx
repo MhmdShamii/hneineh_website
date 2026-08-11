@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
+import { LanguageProvider } from './i18n/LanguageContext.tsx'
 import { hideAppPreloader } from './lib/preloader.ts'
 import GalleryPage from './pages/GalleryPage.tsx'
 import Home from './pages/Home.tsx'
@@ -20,7 +21,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <LanguageProvider>
+      <RouterProvider router={router} />
+    </LanguageProvider>
   </StrictMode>,
 )
 

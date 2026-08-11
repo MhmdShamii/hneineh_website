@@ -1,4 +1,5 @@
 import { reviewsSection, testimonials } from '../content/testimonials'
+import { usePick } from '../i18n/languageContext'
 import Carousel from './ui/Carousel'
 import SectionHeading from './ui/SectionHeading'
 
@@ -19,16 +20,21 @@ function VerifiedBadge({ label }: { label: string }) {
 }
 
 export default function ReviewsSection() {
+  const section = usePick(reviewsSection)
+  const items = usePick(testimonials)
+
   return (
     <section id="reviews" className="bg-greige px-6 py-20">
       <div className="mx-auto max-w-2xl">
-        <SectionHeading title={reviewsSection.title} />
+        <SectionHeading title={section.title} />
 
         <div className="mt-12">
           <Carousel
-            items={testimonials}
+            items={items}
             getKey={(testimonial) => testimonial.id}
-            slideLabel={(i) => `رأي العميل ${i + 1}`}
+            slideLabel={section.slideLabel}
+            prevLabel={section.prevLabel}
+            nextLabel={section.nextLabel}
             renderItem={(testimonial) => (
               <article className="flex h-full flex-col items-center justify-center gap-5 rounded-lg bg-white/50 p-6 text-center ring-1 ring-ink/10 sm:p-8">
                 <p className="font-body line-clamp-5 text-sm leading-relaxed text-ink/80 sm:text-base">

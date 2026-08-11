@@ -5,9 +5,9 @@ type CarouselProps<T> = {
   renderItem: (item: T, isActive: boolean) => ReactNode
   getKey: (item: T) => string
   autoPlayMs?: number
-  slideLabel?: (index: number) => string
-  prevLabel?: string
-  nextLabel?: string
+  slideLabel: (index: number) => string
+  prevLabel: string
+  nextLabel: string
 }
 
 function ArrowButton({
@@ -26,7 +26,20 @@ function ArrowButton({
       aria-label={label}
       className="flex h-8 w-8 items-center justify-center text-brown/60 transition hover:text-brown"
     >
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-5 w-5">
+      {/*
+        Reading-direction aware: "prev" is a start-pointing chevron and
+        "next" is an end-pointing one, each mirrored in RTL via rtl:rotate-180
+        so the glyph always points toward the actual backward/forward
+        direction regardless of language, while DOM order (prev before next)
+        lets `dir` place them at the correct physical side automatically.
+      */}
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        className={`h-5 w-5 rtl:rotate-180`}
+      >
         {direction === 'prev' ? (
           <path d="m15 6-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" />
         ) : (
@@ -47,8 +60,8 @@ export default function Carousel<T>({
   getKey,
   autoPlayMs = 5000,
   slideLabel,
-  prevLabel = 'السابق',
-  nextLabel = 'التالي',
+  prevLabel,
+  nextLabel,
 }: CarouselProps<T>) {
   const [index, setIndex] = useState(0)
   const isPausedRef = useRef(false)
@@ -103,14 +116,14 @@ export default function Carousel<T>({
 
       {items.length > 1 && (
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-          <ArrowButton direction="next" label={nextLabel} onClick={goNext} />
+          <ArrowButton direction="prev" label={prevLabel} onClick={goPrev} />
 
-          <div className="flex flex-wrap-reverse items-center justify-center gap-2">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             {items.map((item, i) => (
               <button
                 key={getKey(item)}
                 type="button"
-                aria-label={slideLabel ? slideLabel(i) : `الشريحة ${i + 1}`}
+                aria-label={slideLabel(i)}
                 aria-current={i === index}
                 onClick={() => setIndex(i)}
                 className={`h-2 rounded-full transition-all duration-300 ${
@@ -120,7 +133,7 @@ export default function Carousel<T>({
             ))}
           </div>
 
-          <ArrowButton direction="prev" label={prevLabel} onClick={goPrev} />
+          <ArrowButton direction="next" label={nextLabel} onClick={goNext} />
         </div>
       )}
     </div>

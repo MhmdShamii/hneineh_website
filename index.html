@@ -5,6 +5,16 @@
     <link rel="icon" type="image/svg+xml" href="/logos/hneineh-primary-icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>حنينة — Hneineh</title>
+    <script>
+      // Set dir/lang from the persisted choice before first paint, so a
+      // returning English-language visitor never sees a flash of RTL.
+      (function () {
+        if (window.localStorage.getItem('hneineh-lang') === 'en') {
+          document.documentElement.lang = 'en'
+          document.documentElement.dir = 'ltr'
+        }
+      })()
+    </script>
     <style>
       /*
        * Critical, inline styles for the pre-launch splash so it paints

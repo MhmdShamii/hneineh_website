@@ -1,18 +1,23 @@
 import { Link } from 'react-router-dom'
-import { galleryLinks, gallerySection } from '../content/gallery'
+import { galleryLinkCta, galleryLinks, gallerySection } from '../content/gallery'
+import { usePick } from '../i18n/languageContext'
 import ImagePlaceholder from './ui/ImagePlaceholder'
 import ImageWithLoader from './ui/ImageWithLoader'
 import Reveal from './ui/Reveal'
 import SectionHeading from './ui/SectionHeading'
 
 export default function GalleryLinksSection() {
+  const section = usePick(gallerySection)
+  const links = usePick(galleryLinks)
+  const cta = usePick(galleryLinkCta)
+
   return (
     <section id="gallery" className="bg-greige px-6 py-20">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading title={gallerySection.title} />
+        <SectionHeading title={section.title} />
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
-          {galleryLinks.map((link, index) => (
+          {links.map((link, index) => (
             <Reveal key={link.id} delayMs={index * 100}>
               <Link
                 to={link.href}
@@ -32,8 +37,11 @@ export default function GalleryLinksSection() {
                 <div className="p-6">
                   <h3 className="font-body text-2xl font-semibold text-brown">{link.title}</h3>
                   <p className="font-body mt-2 text-sm text-ink/70">{link.description}</p>
-                  <span className="font-body mt-4 inline-block text-sm text-olive transition group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
-                    استعرض المزيد ←
+                  <span className="font-body mt-4 inline-flex items-center gap-1 text-sm text-olive transition group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
+                    {cta.viewMore}
+                    <span aria-hidden="true" className="rtl:rotate-180">
+                      →
+                    </span>
                   </span>
                 </div>
               </Link>

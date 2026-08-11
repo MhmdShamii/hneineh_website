@@ -1,29 +1,27 @@
-import { site, socialLinks } from '../content/site'
-import { useInView } from '../hooks/useInView'
+import { site, siteText, socialLinks } from '../content/site'
+import { socialSection } from '../content/social'
+import { usePick } from '../i18n/languageContext'
 import SectionHeading from './ui/SectionHeading'
 import { socialIconPaths } from './ui/socialIconPaths'
 import SplitWindowReveal from './ui/SplitWindowReveal'
-
-const socialSectionContent = {
-  title: 'تابعونا',
-  subtitle: 'كواليس الورشة، مشاريعنا الجديدة، وكل التفاصيل — أول بأول على صفحاتنا.',
-}
+import { useInView } from '../hooks/useInView'
 
 export default function SocialSection() {
   const { ref, isInView } = useInView<HTMLDivElement>()
+  const section = usePick(socialSection)
+  const links = usePick(socialLinks)
+  const text = usePick(siteText)
 
   return (
     <section ref={ref} className="bg-greige">
-      <SplitWindowReveal isInView={isInView} centerIcon={site.logos.primaryIcon} centerIconAlt={site.logoAlt}>
+      <SplitWindowReveal isInView={isInView} centerIcon={site.logos.primaryIcon} centerIconAlt={text.logoAlt}>
         <div className="px-6 py-20">
           <div className="mx-auto max-w-3xl">
-            <SectionHeading title={socialSectionContent.title} />
-            <p className="font-body mx-auto mt-3 max-w-md text-center text-sm text-ink/60">
-              {socialSectionContent.subtitle}
-            </p>
+            <SectionHeading title={section.title} />
+            <p className="font-body mx-auto mt-3 max-w-md text-center text-sm text-ink/60">{section.subtitle}</p>
 
             <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
-              {socialLinks.map((link) => {
+              {links.map((link) => {
                 const Icon = socialIconPaths[link.id]
                 return (
                   <a

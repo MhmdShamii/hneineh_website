@@ -1,17 +1,21 @@
 import { processSection, processSteps } from '../content/process'
+import { usePick } from '../i18n/languageContext'
 import ImagePlaceholder from './ui/ImagePlaceholder'
 import ImageWithLoader from './ui/ImageWithLoader'
 import Reveal from './ui/Reveal'
 import SectionHeading from './ui/SectionHeading'
 
 export default function ProcessSection() {
+  const section = usePick(processSection)
+  const steps = usePick(processSteps)
+
   return (
     <section id="process" className="bg-greige px-6 py-20">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading title={processSection.title} />
+        <SectionHeading title={section.title} />
 
         <div className="mt-16 flex flex-col gap-16 md:gap-24">
-          {processSteps.map((step, index) => {
+          {steps.map((step, index) => {
             const imageFirst = index % 2 === 0
             return (
               <Reveal key={step.id} delayMs={100}>

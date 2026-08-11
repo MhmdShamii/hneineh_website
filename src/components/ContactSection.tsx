@@ -1,5 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react'
-import { contactFields, contactSection, contactValidationMessages } from '../content/contact'
+import { contactConfig, contactFields, contactSection, contactValidationMessages } from '../content/contact'
+import type { ContactFormField } from '../content/types'
+import { usePick } from '../i18n/languageContext'
 import Bdi from './ui/Bdi'
 import Reveal from './ui/Reveal'
 import SectionHeading from './ui/SectionHeading'
@@ -10,18 +12,22 @@ type Status = 'idle' | 'submitting' | 'success' | 'error'
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const phonePattern = /^[0-9+\s-]{7,}$/
 
-function validate(field: (typeof contactFields)[number], value: string): string | null {
-  if (field.required && !value.trim()) return contactValidationMessages.required
-  if (field.type === 'email' && value && !emailPattern.test(value)) {
-    return contactValidationMessages.invalidEmail
-  }
-  if (field.type === 'tel' && value && !phonePattern.test(value)) {
-    return contactValidationMessages.invalidPhone
-  }
+function validate(
+  field: ContactFormField,
+  value: string,
+  messages: { required: string; invalidEmail: string; invalidPhone: string },
+): string | null {
+  if (field.required && !value.trim()) return messages.required
+  if (field.type === 'email' && value && !emailPattern.test(value)) return messages.invalidEmail
+  if (field.type === 'tel' && value && !phonePattern.test(value)) return messages.invalidPhone
   return null
 }
 
 export default function ContactSection() {
+  const text = usePick(contactSection)
+  const fields = usePick(contactFields)
+  const validationMessages = usePick(contactValidationMessages)
+
   const [values, setValues] = useState<FormState>({})
   const [errors, setErrors] = useState<FormState>({})
   const [status, setStatus] = useState<Status>('idle')
@@ -37,8 +43,8 @@ export default function ContactSection() {
     if ((form.elements.namedItem('botcheck') as HTMLInputElement | null)?.checked) return
 
     const nextErrors: FormState = {}
-    for (const field of contactFields) {
-      const message = validate(field, values[field.name] ?? '')
+    for (const field of fields) {
+      const message = validate(field, values[field.name] ?? '', validationMessages)
       if (message) nextErrors[field.name] = message
     }
     setErrors(nextErrors)
@@ -46,12 +52,12 @@ export default function ContactSection() {
 
     setStatus('submitting')
     try {
-      const response = await fetch(contactSection.web3formsEndpoint, {
+      const response = await fetch(contactConfig.web3formsEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: contactSection.web3formsAccessKey,
-          subject: contactSection.emailSubject,
+          access_key: contactConfig.web3formsAccessKey,
+          subject: text.emailSubject,
           from_name: values.name ?? '',
           ...values,
         }),
@@ -71,16 +77,16 @@ export default function ContactSection() {
   return (
     <section id="contact" className="bg-greige px-6 py-20">
       <div className="mx-auto max-w-2xl">
-        <SectionHeading title={contactSection.title} />
+        <SectionHeading title={text.title} />
         <Reveal delayMs={100}>
-          <p className="font-body mt-2 text-center text-ink/70">{contactSection.subtitle}</p>
+          <p className="font-body mt-2 text-center text-ink/70">{text.subtitle}</p>
         </Reveal>
 
         <Reveal delayMs={100}>
           <form onSubmit={handleSubmit} noValidate className="mt-10 grid gap-5 sm:grid-cols-2">
             <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
 
-            {contactFields.map((field) => {
+            {fields.map((field) => {
               const error = errors[field.name]
               const spansFullWidth = field.type === 'email' || field.type === 'textarea'
               const commonProps = {
@@ -122,17 +128,17 @@ export default function ContactSection() {
               disabled={status === 'submitting'}
               className="mt-2 rounded-md bg-olive px-8 py-3 font-body text-greige transition hover:scale-[1.02] hover:opacity-90 disabled:opacity-60 disabled:hover:scale-100 sm:col-span-2 sm:justify-self-start"
             >
-              {status === 'submitting' ? contactSection.submittingLabel : contactSection.submitLabel}
+              {status === 'submitting' ? text.submittingLabel : text.submitLabel}
             </button>
 
             {status === 'success' && (
               <p className="font-body text-sm text-olive sm:col-span-2" role="status">
-                {contactSection.successMessage}
+                {text.successMessage}
               </p>
             )}
             {status === 'error' && (
               <p className="font-body text-sm text-red-700 sm:col-span-2" role="alert">
-                {contactSection.errorMessage} <Bdi>{contactSection.recipientEmail}</Bdi>
+                {text.errorMessage} <Bdi>{contactConfig.recipientEmail}</Bdi>
               </p>
             )}
           </form>

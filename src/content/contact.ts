@@ -16,8 +16,8 @@ export const contactFields: ContactFormField[] = [
   {
     id: 'name',
     name: 'name',
-    label: 'الاسم الكامل',
-    placeholder: 'اسمك الكامل',
+    label: 'الاسم الكريم',
+    placeholder: 'الاسم الكريم',
     type: 'text',
     required: true,
   },

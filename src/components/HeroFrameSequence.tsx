@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { useScrollProgress } from '../hooks/useScrollProgress'
+import { markHeroFramesReady } from '../lib/heroReadiness'
 
 type HeroFrameSequenceProps = {
   /** Ordered array of frame image URLs, first to last. */
@@ -17,6 +18,13 @@ type HeroFrameSequenceProps = {
  * canvas inside a tall wrapper; scroll position within that wrapper maps to
  * the current frame. Falls back to a labeled placeholder box when no frames
  * have been supplied yet.
+ *
+ * Loading is progressive past the first frame: the app-wide pre-launch
+ * splash (see lib/preloader.ts) is what actually keeps the page hidden
+ * until that first frame is ready, so there's no separate loading state
+ * here. Every other frame keeps downloading in the background after that,
+ * and the canvas draws the nearest already-loaded frame while the exact
+ * one for the current scroll position is still on the way in.
  */
 export default function HeroFrameSequence({
   frames,
@@ -30,7 +38,11 @@ export default function HeroFrameSequence({
   const frameCount = frames.length
 
   const [loadedCount, setLoadedCount] = useState(0)
-  const [isReady, setIsReady] = useState(frameCount === 0)
+  const [isFirstFrameReady, setIsFirstFrameReady] = useState(frameCount === 0)
+
+  useEffect(() => {
+    if (isFirstFrameReady) markHeroFramesReady()
+  }, [isFirstFrameReady])
 
   useEffect(() => {
     if (frameCount === 0) return
@@ -39,18 +51,21 @@ export default function HeroFrameSequence({
     imagesRef.current = images
 
     let loaded = 0
-    const onOneLoaded = () => {
+    const onOneLoaded = (index: number) => {
       loaded += 1
-      if (!cancelled) setLoadedCount(loaded)
-      if (loaded === frameCount && !cancelled) setIsReady(true)
+      if (cancelled) return
+      setLoadedCount(loaded)
+      if (index === 0) setIsFirstFrameReady(true)
     }
 
     frames.forEach((src, i) => {
       const img = new Image()
       img.decoding = 'async'
+      // Only the frame the user sees immediately needs to jump the queue.
+      img.fetchPriority = i === 0 ? 'high' : 'low'
       img.src = src
-      img.onload = onOneLoaded
-      img.onerror = onOneLoaded
+      img.onload = () => onOneLoaded(i)
+      img.onerror = () => onOneLoaded(i)
       images[i] = img
     })
 
@@ -66,7 +81,31 @@ export default function HeroFrameSequence({
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    const frameIndex = Math.min(frameCount - 1, Math.round(progress * (frameCount - 1)))
+    const targetIndex = Math.min(frameCount - 1, Math.round(progress * (frameCount - 1)))
+    const isLoaded = (i: number) => {
+      const candidate = imagesRef.current[i]
+      return Boolean(candidate?.complete && candidate.naturalWidth > 0)
+    }
+
+    // Draw the exact frame if it's ready; otherwise fall back to the
+    // nearest already-loaded frame so the picture never just freezes or
+    // goes blank while the rest of the sequence is still downloading.
+    let frameIndex = targetIndex
+    if (!isLoaded(frameIndex)) {
+      let offset = 1
+      while (offset < frameCount) {
+        if (isLoaded(targetIndex - offset)) {
+          frameIndex = targetIndex - offset
+          break
+        }
+        if (isLoaded(targetIndex + offset)) {
+          frameIndex = targetIndex + offset
+          break
+        }
+        offset += 1
+      }
+    }
+
     const img = imagesRef.current[frameIndex]
     if (!img || !img.complete || img.naturalWidth === 0) return
 
@@ -98,8 +137,6 @@ export default function HeroFrameSequence({
     ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight)
   }, [progress, frameCount, loadedCount])
 
-  const loadProgress = frameCount === 0 ? 1 : loadedCount / frameCount
-
   return (
     <div ref={wrapperRef} style={{ height: `${scrollLengthVh}vh` }} className="relative">
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-ink">
@@ -114,18 +151,6 @@ export default function HeroFrameSequence({
             <p className="font-body text-sm">
               فيديو تسلسل اللقطات ({placeholderFrameCount} إطار) — قيد الإضافة
             </p>
-          </div>
-        )}
-
-        {frameCount > 0 && !isReady && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-ink text-greige">
-            <div className="h-1 w-40 overflow-hidden rounded-full bg-greige/20">
-              <div
-                className="h-full rounded-full bg-olive transition-[width] duration-150"
-                style={{ width: `${Math.round(loadProgress * 100)}%` }}
-              />
-            </div>
-            <p className="font-body text-sm text-greige/70">جاري التحميل…</p>
           </div>
         )}
 

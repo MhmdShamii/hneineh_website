@@ -12,8 +12,8 @@ export default function Footer() {
       <Reveal>
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-start">
           <div>
-            <p className="font-body text-lg font-semibold">{site.nameArabic}</p>
-            <p className="font-body mt-1 text-xs text-greige/60">{site.tagline}</p>
+            <img src={site.logos.verticalBeige} alt={site.logoAlt} className="mx-auto h-14 w-auto sm:mx-0" />
+            <p className="font-body mt-2 text-xs text-greige/60">{site.tagline}</p>
           </div>
 
           <SocialIcons links={socialLinks} />

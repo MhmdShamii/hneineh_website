@@ -18,6 +18,8 @@ export const site = {
     primaryIcon: '/logos/hneineh-primary-icon.svg',
     /** Secondary icon mark — used as the loading/spinner glyph */
     secondaryIcon: '/logos/hneineh-secondary-icon.svg',
+    /** Beige stacked lockup — footer, over the dark background */
+    verticalBeige: '/logos/hneineh-vertical-logo-beige.svg',
   },
 }
 

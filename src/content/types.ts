@@ -4,7 +4,7 @@
  * record carries a stable `id` so array order is never load-bearing.
  */
 
-export type SocialPlatform = 'facebook' | 'pinterest' | 'instagram'
+export type SocialPlatform = 'facebook' | 'pinterest' | 'instagram' | 'tiktok'
 
 export interface SocialLink {
   id: SocialPlatform

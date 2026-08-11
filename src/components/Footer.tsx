@@ -8,21 +8,19 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="bg-ink px-6 py-10 text-greige">
+    <footer className="bg-ink px-6 py-14 text-greige">
       <Reveal>
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-start">
-          <div>
-            <img src={site.logos.verticalBeige} alt={site.logoAlt} className="mx-auto h-14 w-auto sm:mx-0" />
-            <p className="font-body mt-2 text-xs text-greige/60">{site.tagline}</p>
-          </div>
+        <div className="mx-auto flex max-w-md flex-col items-center gap-6 text-center">
+          <img src={site.logos.verticalBeige} alt={site.logoAlt} className="h-16 w-auto" />
+          <p className="font-body -mt-2 text-xs text-greige/60">{site.tagline}</p>
 
-          <SocialIcons links={socialLinks} />
+          <SocialIcons links={socialLinks} variant="dark" />
 
-          <div className="font-body text-xs text-greige/60">
-            <p>
-              <Bdi>{site.email}</Bdi>
-            </p>
-            <p className="mt-1">{footerContent.copyright(year)}</p>
+          <div className="h-px w-12 bg-greige/15" />
+
+          <div className="font-body flex flex-col items-center gap-1 text-xs text-greige/60">
+            <Bdi>{site.email}</Bdi>
+            <p>{footerContent.copyright(year)}</p>
           </div>
         </div>
       </Reveal>

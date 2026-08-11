@@ -24,7 +24,8 @@ export const site = {
 }
 
 export const socialLinks: SocialLink[] = [
-  { id: 'facebook', label: 'فيسبوك', url: 'https://facebook.com/' },
-  { id: 'pinterest', label: 'بينتيريست', url: 'https://pinterest.com/' },
-  { id: 'instagram', label: 'انستغرام', url: 'https://instagram.com/' },
+  { id: 'facebook', label: 'فيسبوك', url: 'https://www.facebook.com/share/19R2DseXxq/' },
+  { id: 'instagram', label: 'انستغرام', url: 'https://www.instagram.com/hneineh.lb' },
+  { id: 'tiktok', label: 'تيك توك', url: 'https://www.tiktok.com/@hne.ineh' },
+  { id: 'pinterest', label: 'بينتيريست', url: 'https://de.pinterest.com/hneinehlb/' },
 ]

@@ -9,7 +9,7 @@ const iconPaths: Record<SocialPlatform, ReactNodeFactory> = {
   ),
   pinterest: (props) => (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-      <path d="M12 3a9 9 0 0 0-3.28 17.38c-.05-.75-.09-1.9.02-2.72.1-.74.66-4.7.66-4.7s-.17-.34-.17-.83c0-.78.45-1.36 1.02-1.36.48 0 .71.36.71.79 0 .48-.31 1.2-.46 1.87-.13.56.28 1.02.83 1.02 1 0 1.77-1.05 1.77-2.58 0-1.35-.97-2.29-2.36-2.29-1.6 0-2.55 1.2-2.55 2.45 0 .48.19.99.42 1.27a.17.17 0 0 1 .04.16l-.16.66c-.03.11-.09.14-.2.08-.77-.36-1.25-1.48-1.25-2.38 0-1.94 1.41-3.72 4.06-3.72 2.13 0 3.79 1.52 3.79 3.55 0 2.12-1.34 3.82-3.19 3.82-.62 0-1.21-.33-1.41-.71l-.38 1.47c-.14.53-.51 1.19-.76 1.6A9 9 0 1 0 12 3" />
+      <path d="M12.02 0C5.4 0 .03 5.37.03 11.99c0 5.08 3.16 9.42 7.62 11.16-.1-.95-.2-2.4.04-3.44.22-.94 1.41-5.96 1.41-5.96s-.36-.72-.36-1.78c0-1.66.97-2.91 2.17-2.91 1.02 0 1.52.77 1.52 1.69 0 1.03-.65 2.57-.99 4-.29 1.19.6 2.16 1.78 2.16 2.13 0 3.77-2.24 3.77-5.48 0-2.87-2.06-4.87-5.01-4.87-3.41 0-5.41 2.56-5.41 5.2 0 1.03.39 2.14.89 2.74.1.12.11.22.08.34-.09.38-.29 1.2-.33 1.36-.05.23-.17.27-.4.16-1.5-.69-2.43-2.87-2.43-4.65 0-3.78 2.75-7.25 7.92-7.25 4.16 0 7.4 2.97 7.4 6.93 0 4.13-2.61 7.46-6.23 7.46-1.22 0-2.36-.63-2.75-1.38l-.75 2.85c-.27 1.04-1 2.35-1.49 3.15A11.99 11.99 0 1 0 12.02 0" />
     </svg>
   ),
   instagram: (props) => (
@@ -17,6 +17,11 @@ const iconPaths: Record<SocialPlatform, ReactNodeFactory> = {
       <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
       <circle cx="12" cy="12" r="3.6" />
       <circle cx="17.1" cy="6.9" r="0.9" fill="currentColor" stroke="none" />
+    </svg>
+  ),
+  tiktok: (props) => (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M16.6 5.82c-.9-.79-1.44-1.9-1.5-3.14h-3.02v12.86c0 1.4-1.14 2.54-2.55 2.54a2.55 2.55 0 0 1-2.55-2.55c0-1.53 1.4-2.7 2.94-2.44V9.98c-3.15-.42-5.92 2.03-5.92 5.16 0 3.05 2.53 5.22 5.21 5.22 2.87 0 5.21-2.33 5.21-5.22V8.7a7.5 7.5 0 0 0 4.4 1.4V7.06s-1.71.08-2.22-1.24Z" />
     </svg>
   ),
 }
@@ -27,9 +32,17 @@ type SocialIconsProps = {
   links: SocialLink[]
   className?: string
   iconClassName?: string
+  /** 'light' = dark icon on a light circle (light backgrounds, e.g. the nav).
+   *  'dark' = light icon on a translucent circle (dark backgrounds, e.g. the footer). */
+  variant?: 'light' | 'dark'
 }
 
-export default function SocialIcons({ links, className, iconClassName }: SocialIconsProps) {
+const variantClasses: Record<NonNullable<SocialIconsProps['variant']>, string> = {
+  light: 'bg-ink/5 text-ink hover:bg-olive hover:text-greige',
+  dark: 'bg-greige/10 text-greige hover:bg-olive hover:text-greige',
+}
+
+export default function SocialIcons({ links, className, iconClassName, variant = 'light' }: SocialIconsProps) {
   return (
     <ul className={`flex items-center gap-3 ${className ?? ''}`}>
       {links.map((link) => {
@@ -41,7 +54,7 @@ export default function SocialIcons({ links, className, iconClassName }: SocialI
               target="_blank"
               rel="noreferrer noopener"
               aria-label={link.label}
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-ink/5 text-ink transition hover:scale-105 hover:bg-olive hover:text-greige"
+              className={`flex h-9 w-9 items-center justify-center rounded-full transition hover:scale-105 ${variantClasses[variant]}`}
             >
               <Icon className={iconClassName ?? 'h-4 w-4'} />
             </a>

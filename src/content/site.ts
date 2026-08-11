@@ -5,8 +5,8 @@ import type { SocialLink } from './types'
  * single record a future admin panel would edit for global brand settings.
  */
 export const site = {
-  id: 'huneineh',
-  name: 'Huneineh',
+  id: 'hneineh',
+  name: 'Hneineh',
   nameArabic: 'حنينة',
   tagline: 'Design & Carpentry — Since 1980',
   email: 'info@hneineh.com',

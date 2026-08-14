@@ -31,7 +31,7 @@ export default function GalleryPage({ galleryId }: GalleryPageProps) {
         </button>
 
         <h1 className="font-body mt-4 text-3xl font-semibold text-brown sm:text-4xl">{link?.title}</h1>
-        {link && <p className="font-body mt-2 max-w-xl text-ink/70">{link.description}</p>}
+        {link && <p className="font-body mt-2 max-w-xl text-ink/70">{link.pageDescription}</p>}
 
         {link?.imageSrc && (
           <div className="mt-8">

@@ -65,7 +65,10 @@ export interface FaqItem {
 export interface GalleryLink {
   id: string
   title: string
+  /** Shown on the home-page gallery card */
   description: string
+  /** Shown as the intro text on the gallery's own page — independent of `description` */
+  pageDescription: string
   href: string
   imageAlt: string
   /** Cover photo path under /public — omit to fall back to the placeholder box */

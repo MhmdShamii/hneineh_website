@@ -1,5 +1,6 @@
 import { ctaSection } from '../content/cta'
 import { usePick } from '../i18n/languageContext'
+import { scrollToSection } from '../lib/scrollToHash'
 import Reveal from './ui/Reveal'
 
 export default function CtaSection() {
@@ -22,6 +23,10 @@ export default function CtaSection() {
         <h2 className="font-body mx-auto max-w-2xl text-2xl text-greige sm:text-3xl">{cta.heading}</h2>
         <a
           href={cta.buttonHref}
+          onClick={(event) => {
+            event.preventDefault()
+            scrollToSection(cta.buttonHref.slice(1))
+          }}
           className="font-body mt-6 inline-block rounded-md bg-greige ps-8 pe-8 py-3 text-brown transition hover:scale-[1.03] hover:shadow-lg"
         >
           {cta.buttonLabel}

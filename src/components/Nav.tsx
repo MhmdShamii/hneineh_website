@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type MouseEvent } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { navContactCta, navLinks } from '../content/nav'
+import { scrollToSection } from '../lib/scrollToHash'
 import { site, siteText } from '../content/site'
 import { useLanguage, usePick } from '../i18n/languageContext'
 import ContactPopup from './ContactPopup'
@@ -36,6 +38,22 @@ export default function Nav() {
   const navTextSize = lang === 'ar' ? 'text-sm' : 'text-[12px]'
   const menuRef = useRef<HTMLDivElement>(null)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
+
+  // Nav links are in-page anchors ("#process") — that only works while
+  // already on "/". From another route (e.g. a gallery page), route to
+  // "/" with the same hash instead of just rewriting the URL fragment.
+  // On "/" itself, scroll manually so short sections (reviews/contact/faq)
+  // can center in the viewport instead of the browser's default top-align.
+  const handleAnchorClick = (href: string) => (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault()
+    if (pathname === '/') {
+      scrollToSection(href.slice(1))
+    } else {
+      navigate(`/${href}`)
+    }
+  }
 
   // Close the mobile menu on outside click/tap, Escape, or if the viewport
   // grows past the lg breakpoint (e.g. rotating a tablet) — otherwise the
@@ -77,7 +95,7 @@ export default function Nav() {
             the visual left in English without hardcoding a side. Horizontal
             lockup on tablet/desktop, compact icon mark on mobile where the
             wordmark would crowd the header. */}
-        <a href="#top" className="shrink-0">
+        <a href="#top" onClick={handleAnchorClick('#top')} className="shrink-0">
           <img src={site.logos.horizontal} alt={text.logoAlt} className="hidden h-8 w-auto sm:block" />
           <img src={site.logos.primaryIcon} alt={text.logoAlt} className="h-9 w-auto sm:hidden" />
         </a>
@@ -87,6 +105,7 @@ export default function Nav() {
             <a
               key={link.id}
               href={link.href}
+              onClick={handleAnchorClick(link.href)}
               className={`font-body ${navTextSize} font-bold text-ink/70 transition hover:text-brown`}
             >
               {link.label}
@@ -143,7 +162,10 @@ export default function Nav() {
               <a
                 key={link.id}
                 href={link.href}
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(event) => {
+                  setIsMenuOpen(false)
+                  handleAnchorClick(link.href)(event)
+                }}
                 className={`font-body ${navTextSize} font-bold text-ink/80`}
               >
                 {link.label}

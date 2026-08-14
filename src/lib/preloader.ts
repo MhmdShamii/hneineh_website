@@ -8,6 +8,18 @@ const MAX_WAIT_MS = 8000
 /** Fired the moment the splash starts fading away — the page is now visible. */
 export const APP_READY_EVENT = 'app:ready'
 
+// window events aren't buffered — a listener that subscribes after this
+// fires would otherwise wait forever, so late subscribers (useAppReady) can
+// check this instead of relying solely on catching the event.
+let appReadyFired = false
+window.addEventListener(APP_READY_EVENT, () => {
+  appReadyFired = true
+})
+
+export function isAppReady() {
+  return appReadyFired
+}
+
 /**
  * Fades out and removes the static #app-preloader splash (see index.html)
  * once the app has actually mounted, fonts are ready, and the hero has

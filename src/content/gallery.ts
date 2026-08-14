@@ -20,7 +20,7 @@ export const galleryLinks: Localized<GalleryLink[]> = {
     {
       id: 'carpentry',
       title: 'نجارتنا',
-      description: 'شوف شغلنا بالنجارة، قطع نفذناها بإيدين حرفيين وباهتمام بأصغر تفصيل.',
+      description: 'حرفة مميزة، بأيادِ عمرها اكثر من خمسين سنة .',
       pageDescription: 'حرفة مميزة، بأيادِ عمرها اكثر من خمسين سنة.',
       href: '/gallery/carpentry',
       imageAlt: 'صورة من أعمال النجارة',
@@ -29,7 +29,7 @@ export const galleryLinks: Localized<GalleryLink[]> = {
     {
       id: 'design',
       title: 'تصميمنا',
-      description: 'فوت شوف مشاريع التصميم الداخلي يلي حوّلنا فيها الأفكار لواقع.',
+      description: 'الاحلام والافكار ، بخبرة مهندسنا بتصير واقع.',
       pageDescription: 'الاحلام والافكار، بخبرة مهندسنا بتصير واقع.',
       href: '/gallery/design',
       imageAlt: 'صورة من أعمال التصميم',

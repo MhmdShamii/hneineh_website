@@ -22,8 +22,8 @@ export const heroText: Localized<{ headline: string; scrollHint: string }> = {
 export const heroStats: Localized<StatItem[]> = {
   ar: [
     { id: 'years', value: '٤٦+', label: 'سنة من التميز' },
-    { id: 'completed', value: '٣ألف+', label: 'عمل منجز' },
-    { id: 'happy-clients', value: '٣ألف+', label: 'زبون راضي' },
+    { id: 'completed', value: '٣٠٠٠+', label: 'عمل منجز' },
+    { id: 'happy-clients', value: '٣٠٠٠+', label: 'زبون راضي' },
     { id: 'projects', value: '٣٢٠+', label: 'مشروع' },
     { id: 'founders', value: '٣', label: 'مؤسسون' },
   ],

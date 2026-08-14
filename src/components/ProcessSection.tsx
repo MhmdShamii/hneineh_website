@@ -46,7 +46,7 @@ export default function ProcessSection() {
                     <h3 className="font-body -mt-6 text-xl font-semibold text-brown sm:-mt-8 sm:text-2xl">
                       {step.title}
                     </h3>
-                    <p className="font-body mx-auto mt-3 max-w-md text-sm leading-relaxed text-ink/70 md:mx-0">
+                    <p className="font-body mx-auto mt-3 max-w-md text-base leading-relaxed text-ink/80 md:mx-0">
                       {step.body}
                     </p>
                   </div>

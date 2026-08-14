@@ -2,7 +2,7 @@ import type { Localized, ProcessStep } from './types'
 
 export const processSection: Localized<{ title: string }> = {
   ar: { title: 'رحلتك معنا' },
-  en: { title: 'Your Journey With Us' },
+  en: { title: 'Process' },
 }
 
 export const processSteps: Localized<ProcessStep[]> = {

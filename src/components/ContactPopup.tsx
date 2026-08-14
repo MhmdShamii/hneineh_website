@@ -1,7 +1,9 @@
-import { useEffect } from 'react'
+import { useEffect, type MouseEvent } from 'react'
 import { createPortal } from 'react-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { contactConfig, contactPopup } from '../content/contact'
 import { usePick } from '../i18n/languageContext'
+import { scrollToSection } from '../lib/scrollToHash'
 import Bdi from './ui/Bdi'
 
 function MailIcon() {
@@ -41,6 +43,18 @@ function PhoneIcon() {
 
 export default function ContactPopup({ open, onClose }: { open: boolean; onClose: () => void }) {
   const text = usePick(contactPopup)
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
+
+  const handleEmailClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault()
+    onClose()
+    if (pathname === '/') {
+      scrollToSection('contact')
+    } else {
+      navigate('/#contact')
+    }
+  }
 
   useEffect(() => {
     if (!open) return
@@ -88,7 +102,8 @@ export default function ContactPopup({ open, onClose }: { open: boolean; onClose
 
         <div className="flex flex-col gap-3 px-6 py-6">
           <a
-            href={`mailto:${contactConfig.recipientEmail}`}
+            href="#contact"
+            onClick={handleEmailClick}
             className="group flex items-center gap-4 rounded-xl bg-white/60 px-4 py-4 ring-1 ring-ink/10 transition hover:bg-white hover:ring-olive"
           >
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-olive/10 text-olive transition group-hover:bg-olive group-hover:text-greige">

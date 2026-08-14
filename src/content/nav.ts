@@ -8,9 +8,9 @@ export const navLinks: Localized<NavLink[]> = {
     { id: 'faq', label: 'الأسئلة الشائعة', href: '#faq' },
   ],
   en: [
-    { id: 'process', label: 'Your Journey', href: '#process' },
-    { id: 'reviews', label: 'Client Reviews', href: '#reviews' },
-    { id: 'gallery', label: 'Our Work', href: '#gallery' },
+    { id: 'process', label: 'Process', href: '#process' },
+    { id: 'reviews', label: 'Testimonials', href: '#reviews' },
+    { id: 'gallery', label: 'Portfolio', href: '#gallery' },
     { id: 'faq', label: 'FAQ', href: '#faq' },
   ],
 }

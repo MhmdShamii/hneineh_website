@@ -13,7 +13,7 @@ export const reviewsSection: Localized<{
     nextLabel: 'التالي',
   },
   en: {
-    title: 'Our Work Speaks For Itself',
+    title: 'Testimonials',
     slideLabel: (i) => `Client review ${i + 1}`,
     prevLabel: 'Previous',
     nextLabel: 'Next',

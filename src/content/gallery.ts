@@ -2,7 +2,7 @@ import type { GalleryLink, Localized } from './types'
 
 export const gallerySection: Localized<{ title: string }> = {
   ar: { title: 'خلينا نوسع افقك' },
-  en: { title: 'Explore Our Portfolio' },
+  en: { title: 'Portfolio' },
 }
 
 export const galleryPageText: Localized<{ backToHome: string }> = {

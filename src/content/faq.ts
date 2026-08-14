@@ -2,7 +2,7 @@ import type { FaqItem, Localized } from './types'
 
 export const faqSection: Localized<{ title: string }> = {
   ar: { title: 'كل يلي بدك تعرفه' },
-  en: { title: 'Everything You Need to Know' },
+  en: { title: 'FAQ' },
 }
 
 export const faqItems: Localized<FaqItem[]> = {

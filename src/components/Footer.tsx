@@ -14,9 +14,6 @@ export default function Footer() {
       <Reveal>
         <div className="mx-auto flex max-w-md flex-col items-center gap-6 text-center">
           <img src={site.logos.verticalBeige} alt={text.logoAlt} className="h-16 w-auto" />
-          <p className="font-body -mt-2 text-xs text-greige/60">{text.tagline}</p>
-
-          <div className="h-px w-12 bg-greige/15" />
 
           <div className="font-body flex flex-col items-center gap-1 text-xs text-greige/60">
             <Bdi>{text.email}</Bdi>

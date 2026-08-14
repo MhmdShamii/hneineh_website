@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { navContactCta, navLinks } from '../content/nav'
 import { site, siteText } from '../content/site'
 import { useLanguage, usePick } from '../i18n/languageContext'
+import ContactPopup from './ContactPopup'
 
 const menuAriaLabel = { ar: 'القائمة', en: 'Menu' }
 const translateAction = {
@@ -27,6 +28,7 @@ function TranslateToggle({ className }: { className?: string }) {
 
 export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isContactOpen, setIsContactOpen] = useState(false)
   const { lang } = useLanguage()
   const links = usePick(navLinks)
   const cta = usePick(navContactCta)
@@ -60,12 +62,13 @@ export default function Nav() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <TranslateToggle />
-          <a
-            href={cta.href}
+          <button
+            type="button"
+            onClick={() => setIsContactOpen(true)}
             className={`rounded-md bg-olive ps-5 pe-5 py-2 font-body ${navTextSize} text-greige transition hover:scale-[1.03] hover:opacity-90`}
           >
             {cta.label}
-          </a>
+          </button>
         </div>
 
         <div className="flex items-center gap-2 lg:hidden">
@@ -111,16 +114,21 @@ export default function Nav() {
                 {link.label}
               </a>
             ))}
-            <a
-              href={cta.href}
-              onClick={() => setIsMenuOpen(false)}
+            <button
+              type="button"
+              onClick={() => {
+                setIsMenuOpen(false)
+                setIsContactOpen(true)
+              }}
               className={`w-fit rounded-md bg-olive ps-5 pe-5 py-2 font-body ${navTextSize} text-greige`}
             >
               {cta.label}
-            </a>
+            </button>
           </nav>
         </div>
       )}
+
+      <ContactPopup open={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </header>
   )
 }

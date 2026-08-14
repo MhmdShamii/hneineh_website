@@ -11,8 +11,32 @@ import type { ContactFormField, Localized } from './types'
  */
 export const contactConfig = {
   recipientEmail: 'info@hneineh.com',
+  phoneNumber: '+961 81 066 873',
   web3formsEndpoint: 'https://api.web3forms.com/submit',
   web3formsAccessKey: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+}
+
+export const contactPopup: Localized<{
+  title: string
+  subtitle: string
+  emailLabel: string
+  phoneLabel: string
+  closeLabel: string
+}> = {
+  ar: {
+    title: 'تواصل معنا',
+    subtitle: 'إحنا هون، تواصل معنا مباشرة بالطريقة يلي بتريحك.',
+    emailLabel: 'البريد الإلكتروني',
+    phoneLabel: 'رقم الهاتف',
+    closeLabel: 'إغلاق',
+  },
+  en: {
+    title: 'Get in Touch',
+    subtitle: "We're here — reach out directly, whichever way suits you.",
+    emailLabel: 'Email',
+    phoneLabel: 'Phone',
+    closeLabel: 'Close',
+  },
 }
 
 export const contactSection: Localized<{
@@ -26,7 +50,7 @@ export const contactSection: Localized<{
 }> = {
   ar: {
     title: 'شاركنا فرحتك',
-    subtitle: 'عبّي النموذج وفريقنا بيتواصل معك بأسرع وقت.',
+    subtitle: '',
     emailSubject: 'طلب تواصل جديد من موقع حنينة',
     submitLabel: 'إرسال',
     submittingLabel: 'جاري الإرسال...',
@@ -35,7 +59,7 @@ export const contactSection: Localized<{
   },
   en: {
     title: 'Share Your Joy With Us',
-    subtitle: 'Fill out the form and our team will reach out as soon as possible.',
+    subtitle: '',
     emailSubject: 'New contact request from the Hneineh website',
     submitLabel: 'Send',
     submittingLabel: 'Sending...',

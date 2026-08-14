@@ -2,7 +2,7 @@ import type { Localized } from './types'
 
 export const ctaSection: Localized<{ heading: string; buttonLabel: string; buttonHref: string }> = {
   ar: {
-    heading: 'جاهزين نحوّل تخيّلك إلى بيت حقيقي',
+    heading: 'خلي تجربتك مميزة وخلينا نحقق حلمك.',
     buttonLabel: 'احجز استشارتك المجانية',
     buttonHref: '#contact',
   },

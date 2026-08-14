@@ -116,7 +116,9 @@ export default function ContactPopup({ open, onClose }: { open: boolean; onClose
           </a>
 
           <a
-            href={`tel:${contactConfig.phoneNumber.replace(/\s+/g, '')}`}
+            href={contactConfig.whatsappUrl}
+            target="_blank"
+            rel="noreferrer noopener"
             className="group flex items-center gap-4 rounded-xl bg-white/60 px-4 py-4 ring-1 ring-ink/10 transition hover:bg-white hover:ring-olive"
           >
             <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-olive/10 text-olive transition group-hover:bg-olive group-hover:text-greige">

@@ -18,10 +18,10 @@ export default function GalleryLinksSection() {
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2">
           {links.map((link, index) => (
-            <Reveal key={link.id} delayMs={index * 100}>
+            <Reveal key={link.id} delayMs={index * 100} className="h-full">
               <Link
                 to={link.href}
-                className="group block overflow-hidden rounded-lg bg-white/50 ring-1 ring-ink/10 transition hover:-translate-y-1 hover:shadow-lg"
+                className="group flex h-full flex-col overflow-hidden rounded-lg bg-white/50 ring-1 ring-ink/10 transition hover:-translate-y-1 hover:shadow-lg"
               >
                 <div className="overflow-hidden">
                   {link.imageSrc ? (
@@ -34,10 +34,10 @@ export default function GalleryLinksSection() {
                     <ImagePlaceholder label={link.imageAlt} ratio="video" className="rounded-none" />
                   )}
                 </div>
-                <div className="p-6">
+                <div className="flex flex-1 flex-col p-6">
                   <h3 className="font-body text-2xl font-semibold text-brown">{link.title}</h3>
                   <p className="font-body mt-2 text-sm text-ink/70">{link.description}</p>
-                  <span className="font-body mt-4 inline-flex items-center gap-1 text-sm text-olive transition group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
+                  <span className="font-body mt-auto inline-flex items-center gap-1 pt-4 text-sm text-olive transition group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
                     {cta.viewMore}
                     <span aria-hidden="true" className="rtl:rotate-180">
                       →

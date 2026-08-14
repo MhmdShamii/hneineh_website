@@ -24,14 +24,14 @@ export const heroStats: Localized<StatItem[]> = {
     { id: 'years', value: '٤٦+', label: 'سنة من التميز' },
     { id: 'completed', value: '٣٠٠٠+', label: 'عمل منجز' },
     { id: 'happy-clients', value: '٣٠٠٠+', label: 'زبون راضي' },
-    { id: 'projects', value: '٣٢٠+', label: 'مشروع' },
     { id: 'founders', value: '٣', label: 'مؤسسون' },
+    { id: 'projects', value: '٣٢٠+', label: 'مشروع' },
   ],
   en: [
     { id: 'years', value: '46+', label: 'Years of Excellence' },
     { id: 'completed', value: '3K+', label: 'Projects Completed' },
     { id: 'happy-clients', value: '3K+', label: 'Happy Clients' },
-    { id: 'projects', value: '320+', label: 'Projects' },
     { id: 'founders', value: '3', label: 'Founders' },
+    { id: 'projects', value: '320+', label: 'Projects' },
   ],
 }

@@ -12,6 +12,7 @@ import type { ContactFormField, Localized } from './types'
 export const contactConfig = {
   recipientEmail: 'info@hneineh.com',
   phoneNumber: '+961 81 066 873',
+  whatsappUrl: 'https://wa.me/96181066873',
   web3formsEndpoint: 'https://api.web3forms.com/submit',
   web3formsAccessKey: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
 }

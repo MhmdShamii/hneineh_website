@@ -15,6 +15,18 @@ function StatValue({ stat, shouldStart }: { stat: StatItem; shouldStart: boolean
   return <Bdi>{display}</Bdi>
 }
 
+function Stat({ stat, shouldStart }: { stat: StatItem; shouldStart: boolean }) {
+  return (
+    <div className="flex w-20 shrink-0 flex-col items-center gap-1 sm:w-auto">
+      <dt className="sr-only">{stat.label}</dt>
+      <dd className="font-body text-2xl font-semibold text-greige drop-shadow sm:text-3xl">
+        <StatValue stat={stat} shouldStart={shouldStart} />
+      </dd>
+      <dd className="font-body text-xs text-greige drop-shadow sm:text-sm">{stat.label}</dd>
+    </div>
+  )
+}
+
 export default function Hero() {
   const appReady = useAppReady()
   const text = usePick(heroText)
@@ -34,16 +46,17 @@ export default function Hero() {
             </Reveal>
 
             <Reveal delayMs={150}>
-              <dl className="grid w-full max-w-3xl grid-cols-3 gap-x-4 gap-y-6 sm:grid-cols-5">
-                {stats.map((stat) => (
-                  <div key={stat.id} className="flex flex-col items-center gap-1">
-                    <dt className="sr-only">{stat.label}</dt>
-                    <dd className="font-body text-2xl font-semibold text-greige drop-shadow sm:text-3xl">
-                      <StatValue stat={stat} shouldStart={appReady} />
-                    </dd>
-                    <dd className="font-body text-xs text-greige drop-shadow sm:text-sm">{stat.label}</dd>
-                  </div>
-                ))}
+              <dl className="flex w-full max-w-3xl flex-col items-center gap-y-6 sm:grid sm:grid-cols-5 sm:gap-x-4">
+                <div className="flex justify-center gap-x-4 sm:contents">
+                  {stats.slice(0, 3).map((stat) => (
+                    <Stat key={stat.id} stat={stat} shouldStart={appReady} />
+                  ))}
+                </div>
+                <div className="flex justify-center gap-x-4 sm:contents">
+                  {stats.slice(3).map((stat) => (
+                    <Stat key={stat.id} stat={stat} shouldStart={appReady} />
+                  ))}
+                </div>
               </dl>
             </Reveal>
 

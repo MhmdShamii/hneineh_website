@@ -29,7 +29,7 @@ export default function ProcessSection() {
                       <ImageWithLoader
                         src={step.imageSrc}
                         alt={step.imageAlt}
-                        className="aspect-[4/3] w-full object-cover transition-transform duration-500 ease-out hover:scale-105"
+                        className="aspect-square w-full object-cover transition-transform duration-500 ease-out hover:scale-105"
                       />
                     ) : (
                       <ImagePlaceholder label={step.imageAlt} ratio="square" className="rounded-none" />

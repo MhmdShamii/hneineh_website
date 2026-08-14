@@ -38,7 +38,7 @@ export const faqItems: Localized<FaqItem[]> = {
     },
     {
       id: 'what-we-offer',
-      question: 'شو منقدم?',
+      question: 'شو منقدم؟',
       answer: '',
       showServicesList: true,
     },

@@ -25,7 +25,7 @@ export const contactPopup: Localized<{
 }> = {
   ar: {
     title: 'تواصل معنا',
-    subtitle: 'إحنا هون، تواصل معنا مباشرة بالطريقة يلي بتريحك.',
+    subtitle: 'نحنا هون، تواصل معنا بالطريقة يلي بتريحك.',
     emailLabel: 'البريد الإلكتروني',
     phoneLabel: 'رقم الهاتف',
     closeLabel: 'إغلاق',

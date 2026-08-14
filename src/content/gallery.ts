@@ -11,7 +11,7 @@ export const galleryPageText: Localized<{ backToHome: string }> = {
 }
 
 export const galleryLinkCta: Localized<{ viewMore: string }> = {
-  ar: { viewMore: 'استعرض المزيد' },
+  ar: { viewMore: 'شوف أكتر' },
   en: { viewMore: 'View More' },
 }
 
@@ -20,7 +20,7 @@ export const galleryLinks: Localized<GalleryLink[]> = {
     {
       id: 'carpentry',
       title: 'نجارتنا',
-      description: 'استعرض مجموعة من أعمال النجارة التي نفذناها بأيادٍ حرفية.',
+      description: 'شوف شغلنا بالنجارة، قطع نفذناها بإيدين حرفيين وباهتمام بأصغر تفصيل.',
       href: '/gallery/carpentry',
       imageAlt: 'صورة من أعمال النجارة',
       imageSrc: '/carpentry.png',
@@ -28,7 +28,7 @@ export const galleryLinks: Localized<GalleryLink[]> = {
     {
       id: 'design',
       title: 'تصميمنا',
-      description: 'تجوّل في مشاريع التصميم الداخلي التي حوّلنا فيها الأفكار إلى واقع.',
+      description: 'فوت شوف مشاريع التصميم الداخلي يلي حوّلنا فيها الأفكار لواقع.',
       href: '/gallery/design',
       imageAlt: 'صورة من أعمال التصميم',
       imageSrc: '/interior.png',

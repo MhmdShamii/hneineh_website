@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { navContactCta, navLinks } from '../content/nav'
 import { site, siteText } from '../content/site'
 import { useLanguage, usePick } from '../i18n/languageContext'
@@ -34,6 +34,40 @@ export default function Nav() {
   const cta = usePick(navContactCta)
   const text = usePick(siteText)
   const navTextSize = lang === 'ar' ? 'text-sm' : 'text-[12px]'
+  const menuRef = useRef<HTMLDivElement>(null)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+
+  // Close the mobile menu on outside click/tap, Escape, or if the viewport
+  // grows past the lg breakpoint (e.g. rotating a tablet) — otherwise the
+  // menu can get stuck open with no way to dismiss it.
+  useEffect(() => {
+    if (!isMenuOpen) return
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target as Node
+      if (menuRef.current?.contains(target) || menuButtonRef.current?.contains(target)) return
+      setIsMenuOpen(false)
+    }
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsMenuOpen(false)
+    }
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) setIsMenuOpen(false)
+    }
+
+    document.addEventListener('pointerdown', handlePointerDown)
+    document.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('resize', handleResize)
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown)
+      document.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('resize', handleResize)
+      document.body.style.overflow = previousOverflow
+    }
+  }, [isMenuOpen])
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-greige/40 backdrop-blur-md">
@@ -74,6 +108,7 @@ export default function Nav() {
         <div className="flex items-center gap-2 lg:hidden">
           <TranslateToggle />
           <button
+            ref={menuButtonRef}
             type="button"
             onClick={() => setIsMenuOpen((open) => !open)}
             aria-expanded={isMenuOpen}
@@ -102,7 +137,7 @@ export default function Nav() {
       </div>
 
       {isMenuOpen && (
-        <div className="border-t border-ink/10 bg-greige/90 px-6 py-4 backdrop-blur-md lg:hidden">
+        <div ref={menuRef} className="border-t border-ink/10 bg-greige/90 px-6 py-4 backdrop-blur-md lg:hidden">
           <nav className="flex flex-col gap-4">
             {links.map((link) => (
               <a

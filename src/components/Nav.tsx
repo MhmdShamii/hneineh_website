@@ -51,7 +51,7 @@ export default function Nav() {
             <a
               key={link.id}
               href={link.href}
-              className={`font-body ${navTextSize} text-ink/70 transition hover:text-brown`}
+              className={`font-body ${navTextSize} font-bold text-ink/70 transition hover:text-brown`}
             >
               {link.label}
             </a>
@@ -106,7 +106,7 @@ export default function Nav() {
                 key={link.id}
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
-                className={`font-body ${navTextSize} text-ink/80`}
+                className={`font-body ${navTextSize} font-bold text-ink/80`}
               >
                 {link.label}
               </a>

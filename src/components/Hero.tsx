@@ -41,14 +41,14 @@ export default function Hero() {
                     <dd className="font-body text-2xl font-semibold text-greige drop-shadow sm:text-3xl">
                       <StatValue stat={stat} shouldStart={appReady} />
                     </dd>
-                    <dd className="font-body text-xs text-greige/80 sm:text-sm">{stat.label}</dd>
+                    <dd className="font-body text-xs text-greige drop-shadow sm:text-sm">{stat.label}</dd>
                   </div>
                 ))}
               </dl>
             </Reveal>
 
             <Reveal delayMs={300}>
-              <p className="font-body text-sm text-greige/70">{text.scrollHint}</p>
+              <p className="font-body text-sm text-greige drop-shadow">{text.scrollHint}</p>
             </Reveal>
           </div>
         }

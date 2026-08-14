@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from 'react'
  * hidden only ever happens once the element is fully off-screen — content
  * never fades to empty while it's still visible on screen.
  */
-export function useInView<T extends HTMLElement>(threshold = 0, once = false) {
+export function useInView<T extends HTMLElement>(threshold = 0, once = false, rootMargin = '0px') {
   const ref = useRef<T | null>(null)
   const [isInView, setIsInView] = useState(
     () => typeof IntersectionObserver === 'undefined',
@@ -28,11 +28,11 @@ export function useInView<T extends HTMLElement>(threshold = 0, once = false) {
           setIsInView(false)
         }
       },
-      { threshold },
+      { threshold, rootMargin },
     )
     observer.observe(node)
     return () => observer.disconnect()
-  }, [threshold, once])
+  }, [threshold, once, rootMargin])
 
   return { ref, isInView }
 }

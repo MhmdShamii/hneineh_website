@@ -7,7 +7,10 @@ import SplitWindowReveal from './ui/SplitWindowReveal'
 import { useInView } from '../hooks/useInView'
 
 export default function SocialSection() {
-  const { ref, isInView } = useInView<HTMLDivElement>()
+  // Shrinks the observed viewport to its top 40% — the curtain only opens
+  // once the section has scrolled up that far, not the instant it peeks in
+  // from the bottom (e.g. when jumping straight to the Contact anchor).
+  const { ref, isInView } = useInView<HTMLDivElement>(0, false, '0px 0px -60% 0px')
   const section = usePick(socialSection)
   const links = usePick(socialLinks)
   const text = usePick(siteText)

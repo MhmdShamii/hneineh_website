@@ -58,7 +58,7 @@ export const contactSection: Localized<{
     errorMessage: 'صار في خطأ أثناء الإرسال، جرّب مرة تانية أو تواصل معنا مباشرة على',
   },
   en: {
-    title: 'Share Your Joy With Us',
+    title: 'Let’s Bring Your Vision to Life',
     subtitle: '',
     emailSubject: 'New contact request from the Hneineh website',
     submitLabel: 'Send',

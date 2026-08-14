@@ -14,8 +14,8 @@ export const heroText: Localized<{ headline: string; scrollHint: string }> = {
     scrollHint: 'اسحب لتحت واكتشف شو مخبّاية الرحلة',
   },
   en: {
-    headline: 'The home you imagined... it’s time to make it real',
-    scrollHint: 'Keep scrolling and explore the journey we’ll take together',
+    headline: 'The home you’ve always imagined — it’s time to make it real',
+    scrollHint: 'Keep scrolling to explore the journey we’ll take together',
   },
 }
 

@@ -2,7 +2,7 @@ import type { GalleryLink, Localized } from './types'
 
 export const gallerySection: Localized<{ title: string }> = {
   ar: { title: 'خلينا نوسع افقك' },
-  en: { title: 'Let’s Broaden Your Horizon' },
+  en: { title: 'Explore Our Portfolio' },
 }
 
 export const galleryPageText: Localized<{ backToHome: string }> = {
@@ -40,8 +40,8 @@ export const galleryLinks: Localized<GalleryLink[]> = {
     {
       id: 'carpentry',
       title: 'Our Carpentry',
-      description: 'Browse a collection of carpentry work we’ve crafted by hand.',
-      pageDescription: 'Browse a collection of carpentry work we’ve crafted by hand.',
+      description: 'Take a look at our carpentry — every piece handcrafted with real attention to detail.',
+      pageDescription: 'Fine craftsmanship, shaped by hands with over fifty years of experience.',
       href: '/gallery/carpentry',
       imageAlt: 'Photo of carpentry work',
       imageSrc: '/carpentry.png',
@@ -49,8 +49,8 @@ export const galleryLinks: Localized<GalleryLink[]> = {
     {
       id: 'design',
       title: 'Our Design',
-      description: 'Explore interior design projects where we turned ideas into reality.',
-      pageDescription: 'Explore interior design projects where we turned ideas into reality.',
+      description: 'Step into our interior design projects — where ideas become reality.',
+      pageDescription: 'Your dreams and ideas, brought to life through our engineers’ expertise.',
       href: '/gallery/design',
       imageAlt: 'Photo of design work',
       imageSrc: '/interior.png',

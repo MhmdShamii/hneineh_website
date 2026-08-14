@@ -17,7 +17,13 @@ export function useCountUp(value: string, shouldStart: boolean, durationMs = 120
   const [display, setDisplay] = useState(target === null ? value : value.replace(numberPattern, '0'))
 
   useEffect(() => {
-    if (!shouldStart || target === null) return
+    // No animatable digits (e.g. the Arabic label swapped in) — just show
+    // the value as-is instead of leaving the previous language's number.
+    if (target === null) {
+      setDisplay(value)
+      return
+    }
+    if (!shouldStart) return
 
     let raf: number
     const start = performance.now()

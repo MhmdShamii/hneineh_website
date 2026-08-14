@@ -7,7 +7,7 @@ export const ctaSection: Localized<{ heading: string; buttonLabel: string; butto
     buttonHref: '#contact',
   },
   en: {
-    heading: 'Ready to turn your imagination into a real home',
+    heading: 'Ready to Turn Your Vision Into a Real Home?',
     buttonLabel: 'Book Your Free Consultation',
     buttonHref: '#contact',
   },

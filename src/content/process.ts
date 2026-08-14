@@ -75,7 +75,7 @@ export const processSteps: Localized<ProcessStep[]> = {
     {
       id: 'vision-in-detail',
       numeral: '4',
-      title: 'A Vision Behind Every Detail',
+      title: 'Every Detail Has a Purpose',
       body: 'Before manufacturing begins, every project is studied through an interior architect’s eye. Beauty alone isn’t enough — every detail has to be practical, comfortable, and designed to serve your daily life.',
       imageAlt: 'Photo from the detailed design stage',
     },

@@ -1,8 +1,9 @@
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 
 type BdiProps = {
   children: ReactNode
   className?: string
+  style?: CSSProperties
   as?: 'span' | 'div'
 }
 
@@ -10,9 +11,9 @@ type BdiProps = {
  * Isolates LTR content (numbers, emails, phone numbers, hex codes) so it
  * renders correctly when embedded inside RTL-flowing Arabic text.
  */
-export default function Bdi({ children, className, as: Tag = 'span' }: BdiProps) {
+export default function Bdi({ children, className, style, as: Tag = 'span' }: BdiProps) {
   return (
-    <Tag dir="ltr" className={`inline-block [unicode-bidi:isolate] ${className ?? ''}`}>
+    <Tag dir="ltr" className={`inline-block [unicode-bidi:isolate] ${className ?? ''}`} style={style}>
       {children}
     </Tag>
   )

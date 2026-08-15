@@ -12,7 +12,11 @@ const frames = buildFrameUrls(heroFrames)
 
 function StatValue({ stat, shouldStart }: { stat: StatItem; shouldStart: boolean }) {
   const display = useCountUp(stat.value, shouldStart)
-  return <Bdi>{display}</Bdi>
+  return (
+    <Bdi className="inline-block text-center tabular-nums" style={{ minWidth: `${stat.value.length}ch` }}>
+      {display}
+    </Bdi>
+  )
 }
 
 function Stat({ stat, shouldStart }: { stat: StatItem; shouldStart: boolean }) {

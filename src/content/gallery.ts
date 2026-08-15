@@ -28,7 +28,7 @@ export const galleryLinks: Localized<GalleryLink[]> = {
     },
     {
       id: 'design',
-      title: 'تصميمنا',
+      title: 'مهندسينا',
       description: 'الاحلام والافكار ، بخبرة مهندسنا بتصير واقع.',
       pageDescription: 'الاحلام والافكار، بخبرة مهندسنا بتصير واقع.',
       href: '/gallery/design',

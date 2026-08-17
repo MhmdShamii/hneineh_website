@@ -24,7 +24,7 @@ export const galleryLinks: Localized<GalleryLink[]> = {
       pageDescription: 'حرفة مميزة، بأيادِ عمرها اكثر من خمسين سنة.',
       href: '/gallery/carpentry',
       imageAlt: 'صورة من أعمال النجارة',
-      imageSrc: '/carpentry.png',
+      imageSrc: '/process_images/hneineh-Our-Carpentry-1920x1080.webp',
     },
     {
       id: 'design',
@@ -33,7 +33,7 @@ export const galleryLinks: Localized<GalleryLink[]> = {
       pageDescription: 'الاحلام والافكار، بخبرة مهندسنا بتصير واقع.',
       href: '/gallery/design',
       imageAlt: 'صورة من أعمال التصميم',
-      imageSrc: '/interior.png',
+      imageSrc: '/process_images/hneineh-Our-Engineers-1920x1080.webp',
     },
   ],
   en: [
@@ -44,7 +44,7 @@ export const galleryLinks: Localized<GalleryLink[]> = {
       pageDescription: 'Fine craftsmanship, shaped by hands with over fifty years of experience.',
       href: '/gallery/carpentry',
       imageAlt: 'Photo of carpentry work',
-      imageSrc: '/carpentry.png',
+      imageSrc: '/process_images/hneineh-Our-Carpentry-1920x1080.webp',
     },
     {
       id: 'design',
@@ -53,7 +53,7 @@ export const galleryLinks: Localized<GalleryLink[]> = {
       pageDescription: 'Your dreams and ideas, brought to life through our engineers’ expertise.',
       href: '/gallery/design',
       imageAlt: 'Photo of design work',
-      imageSrc: '/interior.png',
+      imageSrc: '/process_images/hneineh-Our-Engineers-1920x1080.webp',
     },
   ],
 }

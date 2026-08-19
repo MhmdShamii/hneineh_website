@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import ImageWithLoader from '../components/ui/ImageWithLoader'
+import Lightbox from '../components/ui/Lightbox'
 import Reveal from '../components/ui/Reveal'
 import { galleryLinks, galleryPageText, galleryPlaceholderImages } from '../content/gallery'
 import { usePick } from '../i18n/languageContext'
@@ -14,6 +16,7 @@ export default function GalleryPage({ galleryId }: GalleryPageProps) {
   const images = usePick(galleryPlaceholderImages)[galleryId]
   const pageText = usePick(galleryPageText)
   const link = links.find((item) => item.id === galleryId)
+  const [activeImage, setActiveImage] = useState<{ src: string; alt: string } | null>(null)
 
   return (
     <main className="min-h-screen bg-greige px-6 py-16 text-ink">
@@ -45,15 +48,25 @@ export default function GalleryPage({ galleryId }: GalleryPageProps) {
         <section className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {images.map((image, i) => (
             <Reveal key={image.id} delayMs={(i % 3) * 80}>
-              <ImageWithLoader
-                src={image.imageSrc}
-                alt={image.label}
-                className="aspect-square w-full rounded-lg object-cover"
-              />
+              <button
+                type="button"
+                onClick={() => setActiveImage({ src: image.imageSrc, alt: image.label })}
+                className="block w-full cursor-zoom-in overflow-hidden rounded-lg transition hover:-translate-y-1 hover:shadow-lg"
+              >
+                <ImageWithLoader
+                  src={image.imageSrc}
+                  alt={image.label}
+                  className="aspect-square w-full object-cover transition-transform duration-500 ease-out hover:scale-105"
+                />
+              </button>
             </Reveal>
           ))}
         </section>
       </div>
+
+      {activeImage && (
+        <Lightbox src={activeImage.src} alt={activeImage.alt} onClose={() => setActiveImage(null)} />
+      )}
     </main>
   )
 }

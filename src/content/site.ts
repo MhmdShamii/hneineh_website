@@ -42,14 +42,14 @@ export const siteText: Localized<{
 export const socialLinks: Localized<SocialLink[]> = {
   ar: [
     { id: 'facebook', label: 'فيسبوك', url: 'https://www.facebook.com/share/19R2DseXxq/' },
-    { id: 'instagram', label: 'انستغرام', url: 'https://www.instagram.com/hneineh.lb' },
-    { id: 'tiktok', label: 'تيك توك', url: 'https://www.tiktok.com/@hne.ineh' },
+    { id: 'instagram', label: 'انستغرام', url: 'https://www.instagram.com/hneinehinteriorscarpentry/' },
+    { id: 'tiktok', label: 'تيك توك', url: 'https://www.tiktok.com/@hneinehinteriorcarpentry' },
     { id: 'pinterest', label: 'بينتيريست', url: 'https://de.pinterest.com/hneinehlb/' },
   ],
   en: [
     { id: 'facebook', label: 'Facebook', url: 'https://www.facebook.com/share/19R2DseXxq/' },
-    { id: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/hneineh.lb' },
-    { id: 'tiktok', label: 'TikTok', url: 'https://www.tiktok.com/@hne.ineh' },
+    { id: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/hneinehinteriorscarpentry/' },
+    { id: 'tiktok', label: 'TikTok', url: 'https://www.tiktok.com/@hneinehinteriorcarpentry' },
     { id: 'pinterest', label: 'Pinterest', url: 'https://de.pinterest.com/hneinehlb/' },
   ],
 }

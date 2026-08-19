@@ -58,28 +58,39 @@ export const galleryLinks: Localized<GalleryLink[]> = {
   ],
 }
 
+const CARPENTRY_PHOTO_COUNT = 20
+const INTERIOR_PHOTO_COUNT = 24
+
+const carpentryImageSrc = (n: number) =>
+  `/gallary_pics/Carp-WEBP/Carpentry-${String(n).padStart(2, '0')}.webp`
+const interiorImageSrc = (n: number) => `/gallary_pics/Int-WEBP/Interior-${String(n).padStart(2, '0')}.webp`
+
 export const galleryPlaceholderImages: Localized<{
-  carpentry: { id: string; label: string }[]
-  design: { id: string; label: string }[]
+  carpentry: { id: string; label: string; imageSrc: string }[]
+  design: { id: string; label: string; imageSrc: string }[]
 }> = {
   ar: {
-    carpentry: Array.from({ length: 9 }, (_, i) => ({
+    carpentry: Array.from({ length: CARPENTRY_PHOTO_COUNT }, (_, i) => ({
       id: `carpentry-${i + 1}`,
       label: `صورة مشروع نجارة ${i + 1}`,
+      imageSrc: carpentryImageSrc(i + 1),
     })),
-    design: Array.from({ length: 9 }, (_, i) => ({
+    design: Array.from({ length: INTERIOR_PHOTO_COUNT }, (_, i) => ({
       id: `design-${i + 1}`,
       label: `صورة مشروع تصميم ${i + 1}`,
+      imageSrc: interiorImageSrc(i + 1),
     })),
   },
   en: {
-    carpentry: Array.from({ length: 9 }, (_, i) => ({
+    carpentry: Array.from({ length: CARPENTRY_PHOTO_COUNT }, (_, i) => ({
       id: `carpentry-${i + 1}`,
       label: `Carpentry project photo ${i + 1}`,
+      imageSrc: carpentryImageSrc(i + 1),
     })),
-    design: Array.from({ length: 9 }, (_, i) => ({
+    design: Array.from({ length: INTERIOR_PHOTO_COUNT }, (_, i) => ({
       id: `design-${i + 1}`,
       label: `Design project photo ${i + 1}`,
+      imageSrc: interiorImageSrc(i + 1),
     })),
   },
 }

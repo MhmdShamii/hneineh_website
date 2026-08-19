@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import ImagePlaceholder from '../components/ui/ImagePlaceholder'
 import ImageWithLoader from '../components/ui/ImageWithLoader'
 import Reveal from '../components/ui/Reveal'
 import { galleryLinks, galleryPageText, galleryPlaceholderImages } from '../content/gallery'
@@ -46,7 +45,11 @@ export default function GalleryPage({ galleryId }: GalleryPageProps) {
         <section className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {images.map((image, i) => (
             <Reveal key={image.id} delayMs={(i % 3) * 80}>
-              <ImagePlaceholder label={image.label} ratio="square" />
+              <ImageWithLoader
+                src={image.imageSrc}
+                alt={image.label}
+                className="aspect-square w-full rounded-lg object-cover"
+              />
             </Reveal>
           ))}
         </section>

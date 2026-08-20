@@ -89,7 +89,7 @@ export const testimonials: Localized<Testimonial[]> = {
     },
     {
       id: 'testimonial-3',
-      name: 'hala jaber',
+      name: 'Hala jaber',
       verified: true,
       badgeLabel: 'Verified Client',
       text: 'From the very first visit, they understood what I wanted before I even said it — it felt like they’d read my mind. They didn’t need me to explain much, because they already understood my vision from the smallest details. It was a remarkable experience, and the result turned out far more beautiful than I’d imagined.',

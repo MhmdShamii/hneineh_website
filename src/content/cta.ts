@@ -6,7 +6,7 @@ export const ctaSection: Localized<{ heading: string; buttonLabel: string }> = {
     buttonLabel: 'احجز زيارتك المجانية',
   },
   en: {
-    heading: 'Ready to Turn Your Vision Into a Real Home?',
-    buttonLabel: 'Book Your Free Consultation',
+    heading: 'Make It Yours. Make It Extraordinary.',
+    buttonLabel: 'Book Your Complimentary Visit',
   },
 }

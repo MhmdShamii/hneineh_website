@@ -8,13 +8,21 @@ export const heroFrames = {
   padLength: 4,
 }
 
+/** Same sequence, pre-cropped to portrait (9:16) so mobile doesn't live-crop the wide frames down to a narrow sliver. */
+export const heroFramesMobile = {
+  basePath: '/frames-mobile/frame_',
+  extension: 'webp',
+  count: 121,
+  padLength: 4,
+}
+
 export const heroText: Localized<{ headline: string; scrollHint: string }> = {
   ar: {
     headline: 'البيت يلي متخيّلو... صار وقتو يصير حقيقة',
     scrollHint: 'اسحب لتحت واكتشف شو مخبّاية الرحلة',
   },
   en: {
-    headline: 'The home you’ve always imagined — it’s time to make it real',
+    headline: 'The home you’ve always envisioned… now, bring it to life.',
     scrollHint: 'Keep scrolling to explore the journey we’ll take together',
   },
 }

@@ -1,14 +1,16 @@
 import type { StatItem } from '../content/types'
-import { heroFrames, heroStats, heroText } from '../content/hero'
+import { heroFrames, heroFramesMobile, heroStats, heroText } from '../content/hero'
 import { useAppReady } from '../hooks/useAppReady'
 import { useCountUp } from '../hooks/useCountUp'
+import { useIsMobile } from '../hooks/useIsMobile'
 import { usePick } from '../i18n/languageContext'
 import { buildFrameUrls } from '../lib/frames'
 import Bdi from './ui/Bdi'
 import Reveal from './ui/Reveal'
 import HeroFrameSequence from './HeroFrameSequence'
 
-const frames = buildFrameUrls(heroFrames)
+const desktopFrames = buildFrameUrls(heroFrames)
+const mobileFrames = buildFrameUrls(heroFramesMobile)
 
 function StatValue({ stat, shouldStart }: { stat: StatItem; shouldStart: boolean }) {
   const display = useCountUp(stat.value, shouldStart)
@@ -35,6 +37,8 @@ export default function Hero() {
   const appReady = useAppReady()
   const text = usePick(heroText)
   const stats = usePick(heroStats)
+  const isMobile = useIsMobile()
+  const frames = isMobile ? mobileFrames : desktopFrames
 
   return (
     <section id="top" aria-label={text.headline}>

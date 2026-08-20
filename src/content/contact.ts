@@ -50,7 +50,7 @@ export const contactSection: Localized<{
   errorMessage: string
 }> = {
   ar: {
-    title: 'شاركنا فرحتك',
+    title: 'خبرنا شو في ببالك',
     subtitle: '',
     emailSubject: 'طلب تواصل جديد من موقع حنينة',
     submitLabel: 'إرسال',

@@ -23,7 +23,7 @@ function Stat({ stat, shouldStart }: { stat: StatItem; shouldStart: boolean }) {
   return (
     <div className="flex w-20 shrink-0 flex-col items-center gap-1 sm:w-auto">
       <dt className="sr-only">{stat.label}</dt>
-      <dd className="font-body text-2xl font-semibold text-greige drop-shadow sm:text-3xl">
+      <dd className="font-body text-3xl font-bold text-greige drop-shadow-md sm:text-4xl">
         <StatValue stat={stat} shouldStart={shouldStart} />
       </dd>
       <dd className="font-body text-xs text-greige drop-shadow sm:text-sm">{stat.label}</dd>

@@ -2,15 +2,15 @@ import type { Localized, StatItem } from './types'
 
 /** Frame-sequence config is language-agnostic — same video either way. */
 export const heroFrames = {
-  basePath: '/frames/frame_',
+  basePath: '/frames/desktop/frame_',
   extension: 'webp',
-  count: 121,
+  count: 118,
   padLength: 4,
 }
 
 /** Same sequence, pre-cropped to portrait (9:16) so mobile doesn't live-crop the wide frames down to a narrow sliver. */
 export const heroFramesMobile = {
-  basePath: '/frames-mobile/frame_',
+  basePath: '/frames/mobile/frame_',
   extension: 'webp',
   count: 121,
   padLength: 4,

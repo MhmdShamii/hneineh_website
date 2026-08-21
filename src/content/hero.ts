@@ -12,7 +12,7 @@ export const heroFrames = {
 export const heroFramesMobile = {
   basePath: '/frames/mobile/frame_',
   extension: 'webp',
-  count: 121,
+  count: 118,
   padLength: 4,
 }
 
